@@ -5,16 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Şəkillər Yuxarıdan Aşağıya</title>
   <style>
-    /* Saytın ümumi tərzi */
+    /* Ümumi stil */
     body {
       margin: 0;
       padding: 0;
       background-color: #f4f4f4; /* Fon rəngi */
       overflow-x: hidden; /* Yatay scroll-u deaktiv et */
+      font-family: Arial, sans-serif;
+    }
+
+    /* Navbar stil */
+    .navbar {
+      width: 100%; /* Tam eni əhatə et */
+      height: 120px; /* Hündürlük */
+      background-color: #f8f9fa; /* Ağ və xəfif boz ton */
+      display: flex;
+      justify-content: center; /* Mərkəzləşdir */
+      align-items: center; /* Şaquli mərkəzləşdir */
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Yüngül kölgə effekti */
+      position: fixed; /* Sabit üst hissədə qalacaq */
+      top: 0;
+      z-index: 1000; /* Hər şeydən yuxarıda göstər */
+    }
+
+    .search-bar {
+      width: 50%; /* Genişlik */
+      max-width: 500px; /* Maksimum eni */
+      height: 50%; /* Hündürlük: navbar hündürlüyünün yarısı */
+      border: 1px solid #d6d8db; /* Yüngül sərhəd */
+      border-radius: 25px; /* Dairəvi künclər */
+      background-color: #ffffff; /* Ağ fon */
+      display: flex;
+      align-items: center; /* Şaquli mərkəzləşdir */
+      padding: 0 15px; /* Sol və sağ boşluq */
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Yüngül kölgə */
+    }
+
+    .search-bar input {
+      width: 100%; /* Tam genişlik */
+      border: none; /* Çərçivəni sil */
+      outline: none; /* Fokus xəttini sil */
+      font-size: 16px; /* Mətn ölçüsü */
+      color: #333; /* Mətn rəngi */
     }
 
     /* Şəkillər konteyneri */
     .image-container {
+      margin-top: 120px; /* Navbar üçün boşluq */
       display: flex;
       flex-direction: column; /* Şəkilləri yuxarıdan aşağı düz */
       align-items: center; /* Şəkilləri ortala */
@@ -30,6 +67,14 @@
   </style>
 </head>
 <body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="search-bar">
+      <input type="text" placeholder="Search...">
+    </div>
+  </div>
+
+  <!-- Şəkillər -->
   <div class="image-container">
     <img src="1.png" alt="Image 1">
     <img src="2.png" alt="Image 2">
@@ -40,4 +85,3 @@
   </div>
 </body>
 </html>
-

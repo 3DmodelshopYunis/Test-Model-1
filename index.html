@@ -3,65 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Şəkillər Yuxarıdan Aşağıya</title>
+  <title>Şəkillər və Modal Pəncərələr</title>
   <style>
     /* Ümumi stil */
     body {
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4; /* Fon rəngi */
-      overflow-x: hidden; /* Yatay scroll-u deaktiv et */
+      background-color: #f4f4f4;
       font-family: Arial, sans-serif;
+      overflow-x: hidden;
     }
 
     /* Navbar stil */
     .navbar {
-      width: 100%; /* Tam eni əhatə et */
-      height: 120px; /* Hündürlük */
-      background-color: #f8f9fa; /* Ağ və xəfif boz ton */
+      width: 100%;
+      height: 120px;
+      background-color: #f8f9fa;
       display: flex;
-      justify-content: center; /* Mərkəzləşdir */
-      align-items: center; /* Şaquli mərkəzləşdir */
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Yüngül kölgə effekti */
-      position: fixed; /* Sabit üst hissədə qalacaq */
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      position: fixed;
       top: 0;
-      z-index: 1000; /* Hər şeydən yuxarıda göstər */
+      z-index: 1000;
     }
 
     .search-bar {
-      width: 50%; /* Genişlik */
-      max-width: 500px; /* Maksimum eni */
-      height: 50%; /* Hündürlük: navbar hündürlüyünün yarısı */
-      border: 1px solid #d6d8db; /* Yüngül sərhəd */
-      border-radius: 25px; /* Dairəvi künclər */
-      background-color: #ffffff; /* Ağ fon */
+      width: 50%;
+      max-width: 500px;
+      height: 50%;
+      border: 1px solid #d6d8db;
+      border-radius: 25px;
+      background-color: #ffffff;
       display: flex;
-      align-items: center; /* Şaquli mərkəzləşdir */
-      padding: 0 15px; /* Sol və sağ boşluq */
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Yüngül kölgə */
+      align-items: center;
+      padding: 0 15px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .search-bar input {
-      width: 100%; /* Tam genişlik */
-      border: none; /* Çərçivəni sil */
-      outline: none; /* Fokus xəttini sil */
-      font-size: 16px; /* Mətn ölçüsü */
-      color: #333; /* Mətn rəngi */
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-buttons button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .nav-buttons button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Modal pəncərə stil */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      width: 60%;
+      max-width: 400px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .modal-content input {
+      width: 80%;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #d6d8db;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .modal-content button {
+      width: 50%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .modal-content button.submit {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .modal-content button.submit.disabled {
+      background-color: #d6d8db;
+      cursor: not-allowed;
     }
 
     /* Şəkillər konteyneri */
     .image-container {
-      margin-top: 120px; /* Navbar üçün boşluq */
+      margin-top: 120px;
       display: flex;
-      flex-direction: column; /* Şəkilləri yuxarıdan aşağı düz */
-      align-items: center; /* Şəkilləri ortala */
-      gap: 0; /* Şəkillər arasında məsafə 0px */
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
     }
 
     .image-container img {
-      width: 1500px; /* Hər bir şəkil üçün genişlik */
-      max-width: 100%; /* Kiçik ekranlarda uyğunlaşma üçün */
-      height: auto; /* Şəkillərin proporsiyasını qoruyur */
+      width: 1500px;
+      max-width: 100%;
+      height: auto;
       display: block;
     }
   </style>
@@ -72,6 +146,11 @@
     <div class="search-bar">
       <input type="text" placeholder="Search...">
     </div>
+    <div class="nav-buttons">
+      <button id="signUpBtn">Sign Up</button>
+      <button id="signInBtn">Sign In</button>
+    </div>
+    <button id="signOutBtn" style="display: none;">Sign Out</button>
   </div>
 
   <!-- Şəkillər -->
@@ -83,5 +162,78 @@
     <img src="5.png" alt="Image 5">
     <img src="6.png" alt="Image 6">
   </div>
+
+  <!-- Modal Pəncərə -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h3>Giriş</h3>
+      <input type="email" id="emailInput" placeholder="Gmail">
+      <input type="password" id="passwordInput" placeholder="Parol">
+      <button class="submit disabled" id="submitBtn" disabled>Submit</button>
+    </div>
+  </div>
+
+  <script>
+    const signUpBtn = document.getElementById("signUpBtn");
+    const signInBtn = document.getElementById("signInBtn");
+    const signOutBtn = document.getElementById("signOutBtn");
+    const modal = document.getElementById("modal");
+    const emailInput = document.getElementById("emailInput");
+    const passwordInput = document.getElementById("passwordInput");
+    const submitBtn = document.getElementById("submitBtn");
+
+    let loggedInUser = null;
+
+    // Modal açmaq
+    function openModal() {
+      modal.style.display = "flex";
+    }
+
+    // Modal bağlamaq
+    function closeModal() {
+      modal.style.display = "none";
+      emailInput.value = "";
+      passwordInput.value = "";
+      submitBtn.classList.add("disabled");
+      submitBtn.disabled = true;
+    }
+
+    // Email və Parol yoxlamaq
+    function checkInputs() {
+      if (emailInput.value.trim() && passwordInput.value.trim()) {
+        submitBtn.classList.remove("disabled");
+        submitBtn.disabled = false;
+      } else {
+        submitBtn.classList.add("disabled");
+        submitBtn.disabled = true;
+      }
+    }
+
+    // Sign In düyməsi
+    signInBtn.addEventListener("click", openModal);
+    signUpBtn.addEventListener("click", openModal);
+
+    // Input dəyişiklikləri
+    emailInput.addEventListener("input", checkInputs);
+    passwordInput.addEventListener("input", checkInputs);
+
+    // Submit düyməsi
+    submitBtn.addEventListener("click", () => {
+      loggedInUser = emailInput.value;
+      closeModal();
+      signInBtn.style.display = "none";
+      signUpBtn.style.display = "none";
+      signOutBtn.style.display = "block";
+    });
+
+    // Sign Out düyməsi
+    signOutBtn.addEventListener("click", () => {
+      loggedInUser = null;
+      signOutBtn.style.display = "none";
+      signInBtn.style.display = "block";
+      signUpBtn.style.display = "block";
+      location.reload();
+    });
+  </script>
 </body>
 </html>

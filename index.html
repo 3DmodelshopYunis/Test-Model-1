@@ -157,6 +157,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0;
+      position: relative; /* Şəkillərin konteynerini mətni yerləşdirmək üçün nisbi pozisiya veririk */
     }
 
     .image-container img {
@@ -176,6 +177,19 @@
       line-height: 1.6;
       color: #333;
       padding-bottom: 20px;
+    }
+
+    /* Mətni şəkilin üzərində yerləşdirmək */
+    .footer-text {
+      position: absolute;
+      top: 50%;  /* Şəkilin ortasında yerləşdirmək üçün */
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      z-index: 10; /* Mətni ön planda göstərmək */
     }
   </style>
 </head>
@@ -199,12 +213,15 @@
     <img src="3.png" alt="Image 3">
     <img src="4.png" alt="Image 4">
     <img src="5.png" alt="Image 5">
+    <div class="footer-text">
+      Hello! I'm Yunis, I have a great interest in the art of animation and I share my creativity with you on this channel. I make my animations with programs like Adobe After Effects and Blender. I mainly work on comedy and short stories. The works of Pixar and Hayao Miyazaki inspire me a lot. Don't forget to subscribe to my channel for more interesting and colorful animations!
+    </div>
     <img src="6.png" alt="Image 6">
   </div>
 
   <!-- Footer -->
   <div class="footer">
-    Hello! I'm Yunis, I have a great interest in the art of animation and I share my creativity with you on this channel. I make my animations with programs like Adobe After Effects and Blender. I mainly work on comedy and short stories. The works of Pixar and Hayao Miyazaki inspire me a lot. Don't forget to subscribe to my channel for more interesting and colorful animations!
+    <!-- Footer text is already placed in the image container -->
   </div>
 
   <script>
@@ -254,21 +271,23 @@
     passwordInput.addEventListener("input", checkInputs);
 
     // Submit düyməsi
-    submitBtn.addEventListener("click", () => {
+    submitBtn.addEventListener("click", function() {
       loggedInUser = emailInput.value;
       closeModal();
       signInBtn.style.display = "none";
       signUpBtn.style.display = "none";
-      signOutBtn.style.display = "block";
+      signOutBtn.style.display = "inline-block";
+      alert("Welcome, " + loggedInUser);
     });
 
     // Sign Out düyməsi
-    signOutBtn.addEventListener("click", () => {
+    signOutBtn.addEventListener("click", function() {
       loggedInUser = null;
+      signInBtn.style.display = "inline-block";
+      signUpBtn.style.display = "inline-block";
       signOutBtn.style.display = "none";
-      signInBtn.style.display = "block";
-      signUpBtn.style.display = "block";
-      location.reload();
+      alert("You have been logged out.");
+      location.reload();  // Səhifəni yeniləyirik
     });
   </script>
 </body>

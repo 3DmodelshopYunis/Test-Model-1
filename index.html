@@ -1,1 +1,43 @@
-12
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Şəkillər Yuxarıdan Aşağıya</title>
+  <style>
+    /* Saytın ümumi tərzi */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4; /* Fon rəngi */
+      overflow-x: hidden; /* Yatay scroll-u deaktiv et */
+    }
+
+    /* Şəkillər konteyneri */
+    .image-container {
+      display: flex;
+      flex-direction: column; /* Şəkilləri yuxarıdan aşağı düz */
+      align-items: center; /* Şəkilləri ortala */
+      gap: 0; /* Şəkillər arasında məsafə 0px */
+    }
+
+    .image-container img {
+      width: 1500px; /* Hər bir şəkil üçün genişlik */
+      max-width: 100%; /* Kiçik ekranlarda uyğunlaşma üçün */
+      height: auto; /* Şəkillərin proporsiyasını qoruyur */
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="image-container">
+    <img src="1.png" alt="Image 1">
+    <img src="2.png" alt="Image 2">
+    <img src="3.png" alt="Image 3">
+    <img src="4.png" alt="Image 4">
+    <img src="5.png" alt="Image 5">
+    <img src="6.png" alt="Image 6">
+  </div>
+</body>
+</html>
+

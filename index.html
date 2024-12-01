@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navbar və Modal</title>
+  <title>Şəkillər və Modal Pəncərələr</title>
   <style>
     /* Ümumi stil */
     body {
@@ -30,6 +30,9 @@
     }
 
     .search-bar {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       width: 50%;
       max-width: 500px;
       height: 50%;
@@ -38,11 +41,8 @@
       background-color: #ffffff;
       display: flex;
       align-items: center;
-      justify-content: center;
+      padding: 0 15px;
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
     }
 
     .search-bar input {
@@ -57,7 +57,7 @@
       display: flex;
       align-items: center;
       gap: 20px;
-      margin-left: -90px; /* Düymələri sola yaxınlaşdırmaq */
+      margin-left: -9px; /* Sign düymələrini 9px sola çək */
     }
 
     .nav-buttons button {
@@ -74,13 +74,14 @@
       background-color: #0056b3;
     }
 
-    .sign-out-btn {
-      background-color: #dc3545;
-      margin-left: -100px; /* Sign Out düyməsini sola yaxınlaşdırmaq */
+    .nav-buttons #signOutBtn {
+      margin-left: -100px; /* Sign Out düyməsini 100px sola çək */
+      background-color: #ff4d4d;
+      color: white;
     }
 
-    .sign-out-btn:hover {
-      background-color: #b02a37;
+    .nav-buttons #signOutBtn:hover {
+      background-color: #cc0000;
     }
 
     /* Modal pəncərə stil */
@@ -137,17 +138,16 @@
       cursor: not-allowed;
     }
 
-    .close-modal {
+    /* Modal bağlama düyməsi */
+    .close-btn {
       position: absolute;
       top: 10px;
       right: 10px;
+      background-color: transparent;
+      border: none;
       font-size: 20px;
-      color: #dc3545;
+      color: red;
       cursor: pointer;
-    }
-
-    .close-modal:hover {
-      color: #b02a37;
     }
 
     /* Şəkillər konteyneri */
@@ -176,8 +176,8 @@
     <div class="nav-buttons">
       <button id="signUpBtn">Sign Up</button>
       <button id="signInBtn">Sign In</button>
+      <button id="signOutBtn" style="display: none;">Sign Out</button>
     </div>
-    <button id="signOutBtn" class="sign-out-btn" style="display: none;">Sign Out</button>
   </div>
 
   <!-- Şəkillər -->
@@ -193,7 +193,7 @@
   <!-- Modal Pəncərə -->
   <div id="modal" class="modal">
     <div class="modal-content">
-      <span class="close-modal" id="closeModal">X</span>
+      <button class="close-btn" id="closeModalBtn">X</button>
       <h3>Giriş</h3>
       <input type="email" id="emailInput" placeholder="Gmail">
       <input type="password" id="passwordInput" placeholder="Parol">
@@ -206,10 +206,10 @@
     const signInBtn = document.getElementById("signInBtn");
     const signOutBtn = document.getElementById("signOutBtn");
     const modal = document.getElementById("modal");
-    const closeModalBtn = document.getElementById("closeModal");
     const emailInput = document.getElementById("emailInput");
     const passwordInput = document.getElementById("passwordInput");
     const submitBtn = document.getElementById("submitBtn");
+    const closeModalBtn = document.getElementById("closeModalBtn");
 
     let loggedInUser = null;
 
@@ -238,14 +238,16 @@
       }
     }
 
-    // Event Listeners
+    // Modal düymələri
     signInBtn.addEventListener("click", openModal);
     signUpBtn.addEventListener("click", openModal);
     closeModalBtn.addEventListener("click", closeModal);
 
+    // Input dəyişiklikləri
     emailInput.addEventListener("input", checkInputs);
     passwordInput.addEventListener("input", checkInputs);
 
+    // Submit düyməsi
     submitBtn.addEventListener("click", () => {
       loggedInUser = emailInput.value;
       closeModal();
@@ -254,6 +256,7 @@
       signOutBtn.style.display = "block";
     });
 
+    // Sign Out düyməsi
     signOutBtn.addEventListener("click", () => {
       loggedInUser = null;
       signOutBtn.style.display = "none";
